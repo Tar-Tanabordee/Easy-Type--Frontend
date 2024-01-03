@@ -2,7 +2,7 @@ export default function Modal({ isVisible, onClose, children }) {
   if (!isVisible) return null;
 
   const handleClose = (e) => {
-    if (e.target.id === "wrapper") onClose();
+    if (e.target.id === 'wrapper') onClose();
   };
   return (
     <div

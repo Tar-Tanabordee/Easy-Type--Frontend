@@ -1,58 +1,44 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import HomePage from "../page/HomePage";
-import CommunityPage from "../page/CommunityPage";
-import SupportPage from "../page/SupportPage";
-import ShoppingPage from "../page/ShoppingPage";
 import Layout from "../layout/Layout";
-import BlogPage from "../page/BlogPage";
-import LoginPage from "../page/LoginPage";
-import RedirectIfAuthenticated from "../features/auth/RedirectAuthenticated";
-import PaymentPage from "../page/PaymentPage";
-// import AdminPage from "../page/AdminPage";
-import ProductPage from "../page/ProductPage";
-// import AdminLogin from "../features/auth/AdminLogin";
-// import AdminRegisterForm from "../features/auth/AdminRegisterForm";
+import HomePage from "../pages/HomePage";
+import StorePage from "../pages/StorePage";
+import SupportPage from "../pages/SupportPage";
+import ContactPage from "../pages/ContactPage";
+import ProductPage from "../pages/ProductPage";
+import CartPage from "../pages/CartPage";
+import ProfilePage from "../pages/ProfilePage";
+import Authenticated from "../components/auth/Authenticated";
+import OrderPage from "../pages/OrderPage";
+import AboutPage from "../pages/AboutPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 const router = createBrowserRouter([
-  {
-    part: "/",
-
-    element: <HomePage />,
-  },
   {
     path: "/",
     element: <Layout />,
     children: [
       { path: "", element: <HomePage /> },
-      { path: "blog", element: <BlogPage /> },
-      { path: "community", element: <CommunityPage /> },
+      { path: "store", element: <StorePage /> },
       { path: "support", element: <SupportPage /> },
-      { path: "product", element: <ProductPage /> },
-      { path: "shopping", element: <ShoppingPage /> },
-      { path: "payment", element: <PaymentPage /> },
-      // { path: "login", element: <LoginPage /> },
+      { path: "contact", element: <ContactPage /> },
+      { path: "about", element: <AboutPage /> },
+      { path: "product/:id", element: <ProductPage /> },
     ],
   },
   {
-    path: "/login",
+    path: "/",
     element: (
-      <RedirectIfAuthenticated>
-        <LoginPage />
-      </RedirectIfAuthenticated>
+      <Authenticated>
+        <Layout />
+      </Authenticated>
     ),
+    children: [
+      { path: "profile", element: <ProfilePage /> },
+      { path: "cart", element: <CartPage /> },
+      { path: "order", element: <OrderPage /> },
+      { path: "order/:id", element: <CheckoutPage /> },
+    ],
   },
-  // {
-  //   path: "admin/",
-  //   element: <AdminPage />,
-  // },
-  // {
-  //   path: "admin/login",
-  //   element: <AdminLogin />,
-  // },
-  // {
-  //   path: "admin/register",
-  //   element: <AdminRegisterForm />,
-  // },
 ]);
 
 export default function Route() {
